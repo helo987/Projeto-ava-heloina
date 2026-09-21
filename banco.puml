@@ -1,0 +1,19 @@
+@startuml banco
+hide circle
+skinparam linetype ortho
+
+entity "bovinos" {
+  * id : INTEGER <<PK>>
+  --
+  * identificacao_animal : VARCHAR(50)
+  * raca : VARCHAR(50)
+  * peso_kg : FLOAT
+  * data_pesagem : DATE
+  observacoes : TEXT
+}
+
+note right of bovinos
+  Tabela principal para o CRUD de
+  Romaneio de Pesagem de Bovinos
+end note
+@enduml

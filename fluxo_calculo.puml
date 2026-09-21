@@ -1,0 +1,16 @@
+@startuml fluxo_calculo
+start
+:Produtor Rural acede ao sistema de pesagem;
+:Preenche os dados do bovino (Identificação, Raça, Peso em kg);
+if (Os campos obrigatórios estão preenchidos?) then (Sim)
+  :Grava o registo do bovino no banco SQLite;
+  :Registo gravado com sucesso;
+  :Atualiza a listagem de bovinos na tela;
+  :Consulta todos os registos do banco;
+  :Soma o peso individual de cada animal;
+  :Exibe o Peso Total do lote na tela (em kg e arrobas);
+else (Não)
+  :Exibe mensagem de erro: "Preencha todos os campos obrigatórios!";
+endif
+stop
+@enduml

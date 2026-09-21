@@ -1,0 +1,10 @@
+@startuml contexto
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+TITLE Diagrama de Contexto (C4 - Nível 1) - Romaneio de Pesagem de Bovinos
+
+Person(produtor, "Produtor Rural", "Utilizador responsável por gerir o lote e registar as pesagens dos bovinos.")
+System(sistemaBovinos, "Sistema de Romaneio de Pesagem", "Aplicação web que regista, organiza e calcula as pesagens do gado no campo.")
+
+Rel(produtor, sistemaBovinos, "Regista, visualiza, edita e elimina pesagens e consulta o peso total", "HTTPS / Navegador Web")
+@enduml

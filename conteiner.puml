@@ -1,0 +1,17 @@
+@startuml conteiner
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+TITLE Diagrama de Contêiner (C4 - Nível 2) - Romaneio de Pesagem de Bovinos
+
+Person(produtor, "Produtor Rural", "Acede à aplicação web pelo telemóvel ou computador.")
+
+Container_Boundary(c1, "Sistema de Romaneio de Pesagem de Bovinos") {
+    Container(web_app, "Interface Web (Frontend)", "HTML5, CSS3, JavaScript", "Telas interativas para introdução e visualização de dados de pesagem.")
+    Container(backend, "Servidor Backend", "Python, Flask", "Processa as regras de negócio, validações, rotas CRUD e cálculos de peso.")
+    ContainerDb(database, "Banco de Dados", "SQLite", "Armazena as informações dos bovinos, identificações do brinco/lote e registos de peso.")
+}
+
+Rel(produtor, web_app, "Utiliza", "HTTP/Browser")
+Rel(web_app, backend, "Envia formulários e pedidos HTTP", "JSON/HTML renderizado")
+Rel(backend, database, "Lê e escreve dados de pesagem", "SQL / SQLite Connector")
+@enduml
