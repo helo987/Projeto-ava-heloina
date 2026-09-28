@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Nova pesagem{% endblock %}
+{% block content %}
+<section class="card">
+    <h1>Nova pesagem</h1>
+    <form method="post" class="form-grid">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div><label>Identificação do animal</label><input name="identificacao_animal" maxlength="50" required></div>
+        <div><label>Raça</label><input name="raca" maxlength="50" required></div>
+        <div><label>Peso (kg)</label><input type="number" name="peso_kg" min="0.01" max="2000" step="0.01" required></div>
+        <div><label>Data da pesagem</label><input type="date" name="data_pesagem" value="{{ request.form.get('data_pesagem', '') }}" required></div>
+        <div class="full"><label>Observações</label><textarea name="observacoes" maxlength="300"></textarea></div>
+        <div class="full"><button type="submit">Salvar pesagem</button></div>
+    </form>
+</section>
+{% endblock %}
