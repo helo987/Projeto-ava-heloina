@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Erro {{ codigo }}{% endblock %}
+{% block content %}
+<section class="card">
+    <h1>Erro {{ codigo }}</h1>
+    <p>{{ mensagem }}</p>
+    <a class="button" href="{{ url_for('index') if session.get('usuario_id') else url_for('login') }}">Voltar</a>
+</section>
+{% endblock %}
