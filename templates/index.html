@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<div class="hero">
+    <div>
+        <p class="eyebrow">CONTROLE DE PESAGEM</p>
+        <h1>Romaneio de Pesagem de Bovinos</h1>
+        <p>Organize os registros dos animais de forma simples.</p>
+    </div>
+    <a class="button" href="{{ url_for('cadastrar') }}">+ Nova pesagem</a>
+</div>
+
+<div class="summary">
+    <div class="card"><span>Registros</span><strong>{{ romaneios|length }}</strong></div>
+    <div class="card"><span>Peso total</span><strong>{{ "%.2f"|format(peso_total) }} kg</strong></div>
+</div>
+
+<div class="card table-card">
+    <h2>Pesagens cadastradas</h2>
+    {% if romaneios %}
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>ID</th><th>Animal</th><th>Raça</th><th>Peso</th><th>Data</th><th>Ações</th></tr></thead>
+        <tbody>
+        {% for r in romaneios %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.identificacao_animal }}</td>
+            <td>{{ r.raca }}</td>
+            <td>{{ "%.2f"|format(r.peso_kg) }} kg</td>
+            <td>{{ r.data_pesagem.strftime("%d/%m/%Y") }}</td>
+            <td class="actions">
+                <a href="{{ url_for('editar', id=r.id) }}">Editar</a>
+                <form method="post" action="{{ url_for('excluir', id=r.id) }}" onsubmit="return confirm('Excluir este registro?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="link-button" type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p>Nenhuma pesagem cadastrada ainda.</p>
+    {% endif %}
+</div>
+{% endblock %}
