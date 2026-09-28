@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Romaneio de Pesagem{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header>
+    <div class="container nav">
+        <a class="logo" href="{{ url_for('index') }}">🐄 Romaneio Bovinos</a>
+        {% if session.get("usuario_id") %}
+        <nav>
+            <a href="{{ url_for('index') }}">Início</a>
+            <a href="{{ url_for('cadastrar') }}">Nova pesagem</a>
+            <a href="{{ url_for('logout') }}">Sair</a>
+        </nav>
+        {% endif %}
+    </div>
+</header>
+<main class="container">
+    {% with mensagens = get_flashed_messages() %}
+        {% for mensagem in mensagens %}
+            <div class="alert">{{ mensagem }}</div>
+        {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
